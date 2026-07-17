@@ -18,14 +18,12 @@ public abstract class RaidMixin {
     @Shadow
     private int numGroups;
 
-    @Shadow
-    private int raidOmenLevel;
-
     @Inject(method = "tick", at = @At("HEAD"))
     private void enforceHardWaveCountOnEasy(ServerLevel level, CallbackInfo ci) {
         if (this.numGroups == 3
                 && level.getGameRules().get(ToggleDifficultyFeatures.HARD_MODE_RAID_WAVES)) {
-            this.numGroups = 7 + (this.raidOmenLevel >= 2 ? 1 : 0);
+            // Bad Omen's extra wave is handled separately by vanilla Raid logic.
+            this.numGroups = 7;
         }
     }
 }

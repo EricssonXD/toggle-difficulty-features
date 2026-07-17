@@ -24,8 +24,8 @@ public class RaidGameTest implements CustomTestMethodInvoker {
 	}
 
 	@GameTest
-	public void raidOmenTwoAddsBonusWave(GameTestHelper test) {
-		assertWaveCount(test, true, 2, 8);
+	public void raidOmenTwoKeepsSevenRegularWaves(GameTestHelper test) {
+		assertWaveCount(test, true, 2, 7);
 	}
 
 	private void assertWaveCount(GameTestHelper test, boolean enabled, int omenLevel, int expected) {
@@ -34,13 +34,31 @@ public class RaidGameTest implements CustomTestMethodInvoker {
 		server.setDifficulty(Difficulty.EASY, true);
 		level.getGameRules().set(ToggleDifficultyFeatures.HARD_MODE_RAID_WAVES, enabled, server);
 
-		Raid raid = new Raid(test.absolutePos(new BlockPos(1, 1, 1)), Difficulty.EASY);
+		BlockPos spawnPos = test.absolutePos(new BlockPos(1, 1, 1));
+		Raid raid = new Raid(spawnPos, Difficulty.EASY);
 		raid.setRaidOmenLevel(omenLevel);
 		raid.tick(level);
 
 		test.assertValueEqual(expected, numGroups(raid),
 			"unexpected Easy raid wave count with gamerule=" + enabled + " and omen=" + omenLevel);
+		if (omenLevel >= 2) {
+			spawnBonusWave(raid, level, spawnPos);
+		}
 		test.succeed();
+	}
+
+	private static void spawnBonusWave(Raid raid, ServerLevel level, BlockPos spawnPos) {
+		try {
+			Field groupsSpawned = Raid.class.getDeclaredField("groupsSpawned");
+			groupsSpawned.setAccessible(true);
+			groupsSpawned.setInt(raid, numGroups(raid));
+
+			Method spawnGroup = Raid.class.getDeclaredMethod("spawnGroup", ServerLevel.class, BlockPos.class);
+			spawnGroup.setAccessible(true);
+			spawnGroup.invoke(raid, level, spawnPos);
+		} catch (ReflectiveOperationException e) {
+			throw new AssertionError("Could not spawn raid bonus wave", e);
+		}
 	}
 
 	private static int numGroups(Raid raid) {
