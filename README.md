@@ -30,11 +30,15 @@ Requirements: Java 25 and Fabric Loader 0.19.3 or newer.
 ## Development
 
 ```sh
-./gradlew build
-./gradlew runServer
+./gradlew runGameTest  # run server GameTests during development
+./gradlew assemble      # build the jar without running tests
+./gradlew build         # full build, including server GameTests
+./gradlew runServer     # launch a development server
 ```
 
-The built jar is written to `build/libs/`. `./gradlew build` also runs the server GameTests.
+The built jar is written to `build/libs/`. GameTests use a real Minecraft server, so startup takes longer than unit tests. Run `runGameTest` while iterating and reserve `build` for full local or CI verification.
+
+See the [Fabric automated testing guide](https://docs.fabricmc.net/develop/automatic-testing) for details.
 
 ## License
 
