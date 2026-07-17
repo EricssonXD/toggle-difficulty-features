@@ -67,8 +67,8 @@ public interface GameRulesInvoker {
 
 Registers two gamerules in `onInitialize()`:
 
-- `/gamerule forceZombieConversion true|false`
-- `/gamerule hardModeRaidWaves true|false`
+- `/gamerule force_zombie_conversion true|false`
+- `/gamerule hard_mode_raid_waves true|false`
 
 ```java
 public class ToggleDifficultyFeatures implements ModInitializer {
@@ -78,9 +78,9 @@ public class ToggleDifficultyFeatures implements ModInitializer {
     @Override
     public void onInitialize() {
         FORCE_ZOMBIE_CONVERSION = GameRulesInvoker.callRegisterBoolean(
-            "forceZombieConversion", GameRuleCategory.MOBS, true);
+            "force_zombie_conversion", GameRuleCategory.MOBS, true);
         HARD_MODE_RAID_WAVES = GameRulesInvoker.callRegisterBoolean(
-            "hardModeRaidWaves", GameRuleCategory.MOBS, true);
+            "hard_mode_raid_waves", GameRuleCategory.MOBS, true);
         LOGGER.info("ToggleDifficultyFeatures initialized");
     }
 }
@@ -143,10 +143,10 @@ public abstract class RaidMixin {
 ## Gamerule commands
 
 ```
-/gamerule forceZombieConversion false    # disable 100% conversion
-/gamerule hardModeRaidWaves false        # restore default Easy wave counts (3 waves)
-/gamerule forceZombieConversion true     # re-enable
-/gamerule hardModeRaidWaves true         # re-enable
+/gamerule force_zombie_conversion false    # disable 100% conversion
+/gamerule hard_mode_raid_waves false        # restore default Easy wave counts (3 waves)
+/gamerule force_zombie_conversion true     # re-enable
+/gamerule hard_mode_raid_waves true         # re-enable
 ```
 
 Changes take effect immediately — no world reload needed.
