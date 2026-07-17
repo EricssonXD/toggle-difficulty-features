@@ -1,0 +1,12 @@
+{
+	"schemaVersion": 1,
+	"id": "toggle-difficulty-features-test",
+	"version": "1.0.0",
+	"name": "Toggle Difficulty Features GameTests",
+	"environment": "server",
+	"entrypoints": {
+		"fabric-gametest": [
+			"com.ericsson.toggledifficultyfeatures.VillagerConversionGameTest"
+		]
+	}
+}

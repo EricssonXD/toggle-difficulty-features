@@ -34,7 +34,7 @@ Requirements: Java 25 and Fabric Loader 0.19.3 or newer.
 ./gradlew runServer
 ```
 
-The built jar is written to `build/libs/`.
+The built jar is written to `build/libs/`. `./gradlew build` also runs the server GameTests.
 
 ## License
 
