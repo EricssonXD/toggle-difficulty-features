@@ -17,6 +17,7 @@ public class ToggleDifficultyFeatures implements ModInitializer {
 
 	public static GameRule<Boolean> FORCE_ZOMBIE_CONVERSION;
 	public static GameRule<Boolean> HARD_MODE_RAID_WAVES;
+	public static GameRule<Boolean> GLOBAL_VILLAGER_DISCOUNTS;
 
 	@Override
 	public void onInitialize() {
@@ -24,6 +25,8 @@ public class ToggleDifficultyFeatures implements ModInitializer {
 			"force_zombie_conversion", GameRuleCategory.MOBS, true);
 		HARD_MODE_RAID_WAVES = GameRulesInvoker.callRegisterBoolean(
 			"hard_mode_raid_waves", GameRuleCategory.MOBS, true);
+		GLOBAL_VILLAGER_DISCOUNTS = GameRulesInvoker.callRegisterBoolean(
+			"global_villager_discounts", GameRuleCategory.MOBS, false);
 		LOGGER.info("ToggleDifficultyFeatures initialized");
 	}
 

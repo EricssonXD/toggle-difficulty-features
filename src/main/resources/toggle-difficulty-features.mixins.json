@@ -5,6 +5,7 @@
 	"mixins": [
 		"ZombieMixin",
 		"RaidMixin",
+		"VillagerMixin",
 		"GameRulesInvoker"
 	],
 	"injectors": {

@@ -6,16 +6,18 @@ A Fabric mod for Minecraft 26.2.
 
 - Forces villager → zombie villager conversion to 100% on every difficulty.
 - Gives Easy raids Hard-mode wave counts: 7 waves, or 8 with Bad Omen II+.
-- Both features are enabled by default and can be toggled with gamerules.
+- Both difficulty features are enabled by default and can be toggled with gamerules.
+- Villager curing discounts can be shared globally with a gamerule (disabled by default).
 
 ## Gamerules
 
 ```text
 /gamerule force_zombie_conversion false
 /gamerule hard_mode_raid_waves false
+/gamerule global_villager_discounts true
 ```
 
-Set either rule to `true` to re-enable it. Changes apply immediately.
+Set a rule to `true` to enable it. Changes apply immediately.
 
 ## Installation
 
