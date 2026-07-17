@@ -3,25 +3,28 @@ package com.ericsson.toggledifficultyfeatures;
 import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.gamerules.GameRule;
+import net.minecraft.world.level.gamerules.GameRuleCategory;
+
+import com.ericsson.toggledifficultyfeatures.mixin.GameRulesInvoker;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ToggleDifficultyFeatures implements ModInitializer {
 	public static final String MOD_ID = "toggle-difficulty-features";
-
-	// This logger is used to write text to the console and the log file.
-	// It is considered best practice to use your mod id as the logger's name.
-	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
+	public static GameRule<Boolean> FORCE_ZOMBIE_CONVERSION;
+	public static GameRule<Boolean> HARD_MODE_RAID_WAVES;
 
 	@Override
 	public void onInitialize() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
-
-		LOGGER.info("Hello Fabric world!");
+		FORCE_ZOMBIE_CONVERSION = GameRulesInvoker.callRegisterBoolean(
+			"forceZombieConversion", GameRuleCategory.MOBS, true);
+		HARD_MODE_RAID_WAVES = GameRulesInvoker.callRegisterBoolean(
+			"hardModeRaidWaves", GameRuleCategory.MOBS, true);
+		LOGGER.info("ToggleDifficultyFeatures initialized");
 	}
 
 	public static Identifier id(String path) {

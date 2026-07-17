@@ -3,12 +3,11 @@
 	"package": "com.ericsson.toggledifficultyfeatures.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"mixins": [
-		"ExampleMixin"
+		"ZombieMixin",
+		"RaidMixin",
+		"GameRulesInvoker"
 	],
 	"injectors": {
 		"defaultRequire": 1
-	},
-	"overwrites": {
-		"requireAnnotations": true
 	}
 }
